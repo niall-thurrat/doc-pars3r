@@ -1,0 +1,21 @@
+{
+  "name": "doc-pars3r",
+  "version": "1.0.0",
+  "description": "A module that parses text documents!!!",
+  "type": "module",
+  "main": "./src/Document.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.lnu.se:1dv610/student/nt222fc/l2.git"
+  },
+  "keywords": [
+    "parser",
+    "document",
+    "text"
+  ],
+  "author": "Niall Thurrat",
+  "license": "ISC"
+}
