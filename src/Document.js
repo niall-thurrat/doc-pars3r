@@ -1,10 +1,11 @@
 import Tokenizer from 'tokeniz3r'
+import Sentences from './Sentences.js'
 
 export default class Document {
   #grammar
   #sentences
 
-  constructor () {
+  constructor() {
     this.#grammar = [
       {
         tokenType: 'WORD',
@@ -17,15 +18,14 @@ export default class Document {
     ]
   }
   
-  parse (inputStr) {
+  parse(inputStr) {
     const tokenizer = new Tokenizer(inputStr, this.#grammar)
+    const sentences = new Sentences(tokenizer)
 
-    console.log(`Tokenizer first token: ${tokenizer.getActiveToken().toString()}`)
-
-    this.#sentences = inputStr
+    this.#sentences = sentences.getAll()
   }
 
-  getAllSentences () {
+  getAllSentences() {
     return this.#sentences
   }
 }
