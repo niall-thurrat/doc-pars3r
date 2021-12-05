@@ -23,36 +23,35 @@ export default class Sentences {
 //     return this.#sentences
 //   }
 
-  #setSentences(tokenizer) {
+  #setSentences(t) {
     const sentences = []
     let isEndToken = false
 
     while (!isEndToken) {
-      let words = ''
-      let endType = ''
-
-      while (tokenizer.getActiveToken().getType() === 'WORD') {
-        words += tokenizer.getActiveToken().getValue() + ' '
-        tokenizer.setActiveTokenToNext()
+      if (t.getActiveToken().getType() === 'WORD') {
+        sentences.push(new Sentence(t))
+        this.#setTokenizerToNextSentence(t)
       }
 
-      if (tokenizer.getActiveToken().getType() === 'DOT') {
-          words = words.substring(0, words.length - 1)
-          endType = tokenizer.getActiveToken().getValue()
-          tokenizer.setActiveTokenToNext()
-      }
-
-      if (tokenizer.getActiveToken().getType() === 'END') {
+      if (t.getActiveToken().getType() === 'END') {
         isEndToken = true
       }
 
-      // TODDO handle if exception
-
-      sentences.push(new Sentence(words, endType))
-      words = ''
-      endType = ''
+      // TODO throw exception if ActiveToken is not a word (beginning of a sentence) or END
     }
 
     this.#sentences = sentences
+  }
+
+  #setTokenizerToNextSentence(t) {
+    while (t.getActiveToken().getType() === 'WORD') {
+      t.setActiveTokenToNext()
+    }
+    
+    if (t.getActiveToken().getType() === 'DOT') {
+      t.setActiveTokenToNext()
+    } else {
+      // throw exception if dot not found after word(s)
+    }
   }
 }
