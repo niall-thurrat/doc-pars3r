@@ -36,4 +36,16 @@ export default class Document {
   getAllSentences() {
     return this.#sentences
   }
+
+  getRegularSentences() {
+    return this.#sentences.filter(s => s.getEndPunctuation() === '.')
+  }
+
+  getQuestions() {
+    return this.#sentences.filter(s => s.getEndPunctuation() === '?')
+  }
+
+  getExclamations() {
+    return this.#sentences.filter(s => s.getEndPunctuation() === '!')
+  }
 }

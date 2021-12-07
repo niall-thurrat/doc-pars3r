@@ -13,18 +13,6 @@ export default class Sentences {
     return this.#sentences
   }
 
-//   getRegular() {
-//     return this.#sentences
-//   }
-
-//   getQuestions() {
-//     return this.#sentences
-//   }
-
-//   getExclamations() {
-//     return this.#sentences
-//   }
-
   #setSentences(t) {
     const sentences = []
     let isEndToken = false

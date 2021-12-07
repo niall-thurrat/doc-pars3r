@@ -4,6 +4,7 @@ const doc = new Document()
 doc.parse('Hello world. Hello again? Hello a third time!')
 const sentences = doc.getAllSentences()
 
+console.log(`Test - sentences.length(): ${sentences.length}`)
 console.log(`Test - sentences[0].toString(): ${sentences[0].toString()}`)
 console.log(`Test - sentences[0].getEndPunctuation(): ${sentences[0].getEndPunctuation()}`)
 const sentence1Words = sentences[0].getWords()
@@ -24,3 +25,18 @@ const sentence3Words = sentences[2].getWords()
 console.log(`Test - sentence3Words.toString(): ${sentence3Words.toString()}`)
 const sentence3WordsAll = sentence3Words.getAll()
 console.log(`Test - sentence3WordsAll[0].getMatchedText(): ${sentence3WordsAll[0].getMatchedText()}`)
+
+const regSentences = doc.getRegularSentences()
+
+console.log(`\nTest - regSentences.length(): ${regSentences.length}`)
+console.log(`Test - regSentences[0].toString(): ${regSentences[0].toString()}`)
+
+const questions = doc.getQuestions()
+
+console.log(`\nTest - questions.length(): ${questions.length}`)
+console.log(`Test - questions[0].toString(): ${questions[0].toString()}`)
+
+const exs = doc.getExclamations()
+
+console.log(`\nTest - exs.length(): ${exs.length}`)
+console.log(`Test - exs[0].toString(): ${exs[0].toString()}`)
