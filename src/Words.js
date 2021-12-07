@@ -22,7 +22,9 @@ export default class Words {
       words.push(new Word(t))
       t.setActiveTokenToNext()
     }
-    
+
+    // throw exception if empty - a sentence cant exist without words
+
     this.#words = words
   }
 }

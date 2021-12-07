@@ -14,6 +14,14 @@ export default class Document {
       {
         tokenType: 'DOT',
         regex: /^\./
+      },
+      {
+        tokenType: 'QUESTION-MARK',
+        regex: /^\?/
+      },
+      {
+        tokenType: 'EXCLAMATION-MARK',
+        regex: /^\!/
       }
     ]
   }
