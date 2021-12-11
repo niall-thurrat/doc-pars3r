@@ -2,7 +2,7 @@ import Document from './Document.js'
 
 const doc = new Document()
 doc.parse('Hello world. Hello again? Hello a third time!')
-const sentences = doc.getAllSentences()
+const sentences = doc.getAllSentences() // throw exception if doc not parsed yet
 
 console.log(`Test - sentences.length(): ${sentences.length}`)
 console.log(`Test - sentences[0].toString(): ${sentences[0].toString()}`)
@@ -40,3 +40,14 @@ const exs = doc.getExclamations()
 
 console.log(`\nTest - exs.length(): ${exs.length}`)
 console.log(`Test - exs[0].toString(): ${exs[0].toString()}`)
+
+doc.parse('Goodbye world.')
+const rewrittenSentences = doc.getAllSentences()
+
+console.log(`\nTest - rewrittenSentences.length(): ${rewrittenSentences.length}`)
+console.log(`Test - rewrittenSentences[0].toString(): ${rewrittenSentences[0].toString()}`)
+console.log(`Test - rewrittenSentences[0].getEndPunctuation(): ${rewrittenSentences[0].getEndPunctuation()}`)
+const rewrittenSentence1Words = rewrittenSentences[0].getWords()
+console.log(`Test - rewrittenSentence1Words.toString(): ${rewrittenSentence1Words.toString()}`)
+const rewrittenSentence1WordsAll = rewrittenSentence1Words.getAll()
+console.log(`Test - rewrittenSentence1WordsAll[0].getMatchedText(): ${rewrittenSentence1WordsAll[0].getMatchedText()}`)

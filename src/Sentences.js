@@ -1,6 +1,7 @@
-import RegularSentence from './concrete-sentences/RegularSentence.js'
-import Question from './concrete-sentences/Question.js'
-import Exclamation from './concrete-sentences/Exclamation.js'
+// import RegularSentence from './concrete-sentences/RegularSentence.js'
+// import Question from './concrete-sentences/Question.js'
+// import Exclamation from './concrete-sentences/Exclamation.js'
+import SentenceFactory from './SentenceFactory.js'
 
 export default class Sentences {
   #sentences
@@ -34,46 +35,7 @@ export default class Sentences {
   }
 
   #createSentence(t) {
-    const endType = this.#getEndType(t)
-
-    if (endType === 'DOT') {
-      return new RegularSentence(t)
-    } else if (endType === 'QUESTION-MARK') {
-      return new Question(t)
-    } else if (endType === 'EXCLAMATION-MARK') {
-      return new Exclamation(t)
-    } 
-    // else {
-    //   // throw exception if endType not appropriate
-    // }
-  }
-
-  #getEndType(t) {
-    let count = 0
-    let endType
-
-    while (t.getActiveToken().getType() === 'WORD') { 
-      t.setActiveTokenToNext()
-      count++
-    }
-
-    const tokenType = t.getActiveToken().getType()
-    
-    if (tokenType === 'DOT' || tokenType === 'QUESTION-MARK' || tokenType === 'EXCLAMATION-MARK') {
-      endType = tokenType
-      this.#setTokenizerToStartOfSentence(t, count)
-    } else {
-      // TODO throw exception here for non appropriate token after words
-    }
-    
-    return endType
-  }
-
-  #setTokenizerToStartOfSentence(t, count) {
-    while (count > 0) {
-      t.setActiveTokenToPrevious()
-      count--
-    }
+    return new SentenceFactory(t)
   }
 
   #setTokenizerToNextSentence(t) {
