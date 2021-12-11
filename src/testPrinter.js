@@ -1,7 +1,7 @@
-import Document from './Document.js'
+import Parser from './Parser.js'
 
-const doc = new Document()
-doc.parse('Hello world. Hello again? Hello a third time!')
+const parser = new Parser()
+let doc = parser.parseDocument('Hello world. Hello again? Hello a third time!')
 const sentences = doc.getAllSentences() // throw exception if doc not parsed yet
 
 console.log(`Test - sentences.length(): ${sentences.length}`)
@@ -41,7 +41,7 @@ const exs = doc.getExclamations()
 console.log(`\nTest - exs.length(): ${exs.length}`)
 console.log(`Test - exs[0].toString(): ${exs[0].toString()}`)
 
-doc.parse('Goodbye world.')
+doc = parser.parseDocument('Goodbye world.')
 const rewrittenSentences = doc.getAllSentences()
 
 console.log(`\nTest - rewrittenSentences.length(): ${rewrittenSentences.length}`)

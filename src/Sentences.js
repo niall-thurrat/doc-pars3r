@@ -1,6 +1,3 @@
-// import RegularSentence from './concrete-sentences/RegularSentence.js'
-// import Question from './concrete-sentences/Question.js'
-// import Exclamation from './concrete-sentences/Exclamation.js'
 import SentenceFactory from './SentenceFactory.js'
 
 export default class Sentences {

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "A module that parses text documents!!!",
   "type": "module",
-  "main": "./src/Document.js",
+  "main": "./src/Parser.js",
   "scripts": {
     "test": "node ./src/testPrinter.js"
   },
