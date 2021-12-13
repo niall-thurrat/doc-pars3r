@@ -5,22 +5,18 @@ export default class Document {
   #sentences
 
   constructor(tokenizer) {
-    this.#sentences = new Sentences(tokenizer).getAll()
+    this.#sentences = this.#parseSentences(tokenizer)
+    
+    if (tokenizer.getActiveToken().getType() !== 'END') {
+      // TODO throw exception
+    }
   }
 
-  getAllSentences() {
+  #parseSentences(t) {
+    return new Sentences(t)
+  }
+
+  getSentences() {
     return this.#sentences
-  }
-
-  getRegularSentences() {
-    return this.#sentences.filter(s => s.getEndPunctuation() === '.')
-  }
-
-  getQuestions() {
-    return this.#sentences.filter(s => s.getEndPunctuation() === '?')
-  }
-
-  getExclamations() {
-    return this.#sentences.filter(s => s.getEndPunctuation() === '!')
   }
 }

@@ -1,8 +1,12 @@
 import SentenceFactory from './SentenceFactory.js'
 import Sentence from './Sentence.js'
+import RegularSentence from './concrete-sentences/RegularSentence.js'
+import Question from './concrete-sentences/Question.js'
+import Exclamation from './concrete-sentences/Exclamation.js'
 
 export default class Sentences {
   #sentences = []
+  #endTypes = ['DOT', 'QUESTION-MARK', 'EXCLAMATION-MARK']
 
   constructor (tokenizer) {
     this.#setSentences(tokenizer)
@@ -12,20 +16,36 @@ export default class Sentences {
     return this.#sentences
   }
 
-  #setSentences(t) {
-    let isEndToken = false
+  getRegularSentences() {
+    return this.#sentences.filter(s => s instanceof RegularSentence)
+  }
 
-    while (!isEndToken) {
+  getQuestions() {
+    return this.#sentences.filter(s => s instanceof Question)
+  }
+
+  getExclamations() {
+    return this.#sentences.filter(s => s instanceof Exclamation)
+  }
+
+  #setSentences(t) {
+    let isAtEndToken = false
+
+    while (!isAtEndToken) {
       if (t.getActiveToken().getType() === 'WORD') {
-        this.#addSentence(this.#createSentence(t))
+        this.#addSentence(this.#parseSentence(t))
         this.#setTokenizerToNextSentence(t)
       }
 
       if (t.getActiveToken().getType() === 'END') {
-        isEndToken = true
+        isAtEndToken = true
       }
-      // TODO throw exception if ActiveToken is not a word (beginning of a sentence) or END
+      // TODO throw exception if ActiveToken type is not a word (beginning of a sentence) or END
     }
+  }
+
+  #parseSentence(t) {
+    return new SentenceFactory(t)
   }
 
   #addSentence(s) {
@@ -34,21 +54,17 @@ export default class Sentences {
     }
   }
 
-  #createSentence(t) {
-    return new SentenceFactory(t)
-  }
-
   #setTokenizerToNextSentence(t) {
     while (t.getActiveToken().getType() === 'WORD') {
       t.setActiveTokenToNext()
     }
 
     const tokenType = t.getActiveToken().getType()
-    
-    if (tokenType === 'DOT' || tokenType === 'QUESTION-MARK' || tokenType === 'EXCLAMATION-MARK') {
+
+    if (this.#endTypes.includes(tokenType)) {
       t.setActiveTokenToNext()
     } else {
-      // throw exception if dot not found after word(s)
+      // throw exception if acceptable end type not found after word(s)
     }
   }
 }
