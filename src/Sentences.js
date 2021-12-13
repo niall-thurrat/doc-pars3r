@@ -1,7 +1,8 @@
 import SentenceFactory from './SentenceFactory.js'
+import Sentence from './Sentence.js'
 
 export default class Sentences {
-  #sentences
+  #sentences = []
 
   constructor (tokenizer) {
     this.#setSentences(tokenizer)
@@ -12,23 +13,25 @@ export default class Sentences {
   }
 
   #setSentences(t) {
-    const sentences = []
     let isEndToken = false
 
     while (!isEndToken) {
       if (t.getActiveToken().getType() === 'WORD') {
-        sentences.push(this.#createSentence(t))
+        this.#addSentence(this.#createSentence(t))
         this.#setTokenizerToNextSentence(t)
       }
 
       if (t.getActiveToken().getType() === 'END') {
         isEndToken = true
       }
-
       // TODO throw exception if ActiveToken is not a word (beginning of a sentence) or END
     }
+  }
 
-    this.#sentences = sentences
+  #addSentence(s) {
+    if (s instanceof Sentence) {
+      this.#sentences.push(s)
+    }
   }
 
   #createSentence(t) {
