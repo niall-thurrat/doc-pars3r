@@ -3,14 +3,22 @@ import Question from './concrete-sentences/Question.js'
 import Exclamation from './concrete-sentences/Exclamation.js'
 
 export default class SentenceFactory {
-  constructor(tokenizer) {
-    if (this.#getType(tokenizer) === 'DOT')
-      return new RegularSentence(tokenizer)
-    else if (this.#getType(tokenizer) === 'QUESTION-MARK')
-      return new Question(tokenizer)
-    else if (this.#getType(tokenizer) === 'EXCLAMATION-MARK')
-      return new Exclamation(tokenizer)
-    // else throw exception
+  getSentence(tokenizer) {
+    const endType = this.#getType(tokenizer)
+    
+    switch(endType) {
+      case 'DOT':
+        return new RegularSentence(tokenizer)
+        break
+      case 'QUESTION-MARK':
+        return new Question(tokenizer)
+        break
+      case 'EXCLAMATION-MARK':
+        return new Exclamation(tokenizer)
+        break
+      default:
+        // throw exception
+    }
   }
 
   #getType(t) {

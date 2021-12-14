@@ -45,7 +45,7 @@ export default class Sentences {
   }
 
   #parseSentence(t) {
-    return new SentenceFactory(t)
+    return new SentenceFactory().getSentence(t)
   }
 
   #addSentence(s) {
