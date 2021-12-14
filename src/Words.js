@@ -1,7 +1,7 @@
 import Word from './Word.js'
 
 export default class Words {
-  #words
+  #words = []
 
   constructor (tokenizer) {
     this.#setWords(tokenizer)
@@ -16,15 +16,20 @@ export default class Words {
   }
 
   #setWords(t) {
-    const words = []
-
     while (t.getActiveToken().getType() === 'WORD') {
-      words.push(new Word(t))
+      this.#addWord(this.#parseWord(t))
       t.setActiveTokenToNext()
     }
-
     // throw exception if empty - a sentence cant exist without words
+  }
 
-    this.#words = words
+  #parseWord(t) {
+    return new Word(t)
+  }
+
+  #addWord(w) {
+    if (w instanceof Word) {
+      this.#words.push(w)
+    }
   }
 }
