@@ -15,21 +15,21 @@ export default class Words {
     return this.#words
   }
 
-  #setWords(t) {
-    while (t.getActiveToken().getType() === 'WORD') {
-      this.#addWord(this.#parseWord(t))
-      t.setActiveTokenToNext()
+  #setWords(tokenizer) {
+    while (tokenizer.getActiveToken().getType() === 'WORD') {
+      this.#add(this.#parseWord(tokenizer))
+      tokenizer.setActiveTokenToNext()
     }
     // throw exception if empty - a sentence cant exist without words
   }
 
-  #parseWord(t) {
-    return new Word(t)
+  #parseWord(tokenizer) {
+    return new Word(tokenizer)
   }
 
-  #addWord(w) {
-    if (w instanceof Word) {
-      this.#words.push(w)
+  #add(word) {
+    if (word instanceof Word) {
+      this.#words.push(word)
     }
   }
 }

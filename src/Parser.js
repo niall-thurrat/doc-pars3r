@@ -26,7 +26,7 @@ export default class Parser {
   }
 
   parseDocument(inputStr) {
-    const t = new Tokenizer(inputStr, this.#grammar)
-    return new Document(t)
+    const tokenizer = new Tokenizer(inputStr, this.#grammar)
+    return new Document(tokenizer)
   }
 }

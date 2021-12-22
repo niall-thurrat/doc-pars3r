@@ -12,11 +12,23 @@ export default class Document {
     }
   }
 
-  #parseSentences(t) {
-    return new Sentences(t)
+  getSentences() {
+    return this.#sentences.getAll()
   }
 
-  getSentences() {
-    return this.#sentences
+  getRegularSentences() {
+    return this.#sentences.getRegular()
+  }
+
+  getQuestions() {
+    return this.#sentences.getQuestions()
+  }
+
+  getExclamations() {
+    return this.#sentences.getExclamations()
+  }
+  
+  #parseSentences(tokenizer) {
+    return new Sentences(tokenizer)
   }
 }

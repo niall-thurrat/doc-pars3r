@@ -8,11 +8,15 @@ export default class Sentence {
       throw new Error("Can't instantiate abstract class Sentence")
     }
 
-    this.words = new Words(tokenizer)
+    this.words = this.#parseWords(tokenizer)
+  }
+  
+  getAllWords() {
+    return this.words
   }
 
-  getWords() {
-    return this.words
+  #parseWords(tokenizer) {
+    return new Words(tokenizer)
   }
 }
   

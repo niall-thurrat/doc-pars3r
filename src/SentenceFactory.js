@@ -3,10 +3,13 @@ import Question from './concrete-sentences/Question.js'
 import Exclamation from './concrete-sentences/Exclamation.js'
 
 export default class SentenceFactory {
+  #tokenIndex = 0
+  #endType
+
   getSentence(tokenizer) {
-    const endType = this.#getType(tokenizer)
+    this.#setEndType(tokenizer)
     
-    switch(endType) {
+    switch(this.#endType) {
       case 'DOT':
         return new RegularSentence(tokenizer)
         break
@@ -21,25 +24,23 @@ export default class SentenceFactory {
     }
   }
 
-  #getType(t) {
-    let count = 0
-    let endType
-
-    while (t.getActiveToken().getType() === 'WORD') { 
-      t.setActiveTokenToNext()
-      count++
-    }
-
-    endType = t.getActiveToken().getType()
-    this.#setTokenizerToStartOfSentence(t, count)
-    
-    return endType
+  #setEndType(tokenizer) {
+    this.#setToEndOfSentence(tokenizer)
+    this.#endType = tokenizer.getActiveToken().getType()
+    this.#setToStartOfSentence(tokenizer)
   }
 
-   #setTokenizerToStartOfSentence(t, count) {
-    while (count > 0) {
-      t.setActiveTokenToPrevious()
-      count--
+  #setToEndOfSentence(tokenizer) {
+    while (tokenizer.getActiveToken().getType() === 'WORD') { 
+      tokenizer.setActiveTokenToNext()
+      this.#tokenIndex++
+    }
+  }
+
+  #setToStartOfSentence(tokenizer) {
+    while (this.#tokenIndex > 0) {
+      tokenizer.setActiveTokenToPrevious()
+      this.#tokenIndex--
     }
   }
 }

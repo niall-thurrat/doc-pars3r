@@ -6,7 +6,7 @@ import Exclamation from './concrete-sentences/Exclamation.js'
 
 export default class Sentences {
   #sentences = []
-  #endTypes = ['DOT', 'QUESTION-MARK', 'EXCLAMATION-MARK']
+  #acceptedEndTypes = ['DOT', 'QUESTION-MARK', 'EXCLAMATION-MARK'] // not good cohesion but good not to bury this?
 
   constructor (tokenizer) {
     this.#setSentences(tokenizer)
@@ -16,7 +16,7 @@ export default class Sentences {
     return this.#sentences
   }
 
-  getRegularSentences() {
+  getRegular() {
     return this.#sentences.filter(s => s instanceof RegularSentence)
   }
 
@@ -28,41 +28,48 @@ export default class Sentences {
     return this.#sentences.filter(s => s instanceof Exclamation)
   }
 
-  #setSentences(t) {
-    let isAtEndToken = false
-
-    while (!isAtEndToken) {
-      if (t.getActiveToken().getType() === 'WORD') {
-        this.#addSentence(this.#parseSentence(t))
-        this.#setTokenizerToNextSentence(t)
-      }
-
-      if (t.getActiveToken().getType() === 'END') {
-        isAtEndToken = true
-      }
+  #setSentences(tokenizer) {
+    while (tokenizer.getActiveToken().getType() !== 'END') {
+      this.#addSentence(tokenizer)
+      this.#setToNextSentence(tokenizer)
       // TODO throw exception if ActiveToken type is not a word (beginning of a sentence) or END
     }
   }
 
-  #parseSentence(t) {
-    return new SentenceFactory().getSentence(t)
-  }
-
-  #addSentence(s) {
-    if (s instanceof Sentence) {
-      this.#sentences.push(s)
+  #addSentence(tokenizer) {
+    if (tokenizer.getActiveToken().getType() === 'WORD') {
+      this.#add(this.#parseSentence(tokenizer))
     }
   }
 
-  #setTokenizerToNextSentence(t) {
-    while (t.getActiveToken().getType() === 'WORD') {
-      t.setActiveTokenToNext()
+  #parseSentence(tokenizer) {
+    return new SentenceFactory().getSentence(tokenizer)
+  }
+
+  #add(sentence) {
+    if (sentence instanceof Sentence) {
+      this.#sentences.push(sentence)
+    } else {
+      // throw exception - trying to add non-Sentence item to Sentences
     }
+  }
 
-    const tokenType = t.getActiveToken().getType()
+  #setToNextSentence(tokenizer) {
+    this.#setActiveTokenAfterWords(tokenizer)
+    this.#setActiveTokenAfterSentenceEndType(tokenizer)
+  }
 
-    if (this.#endTypes.includes(tokenType)) {
-      t.setActiveTokenToNext()
+  #setActiveTokenAfterWords(tokenizer) {
+    while (tokenizer.getActiveToken().getType() === 'WORD') {
+      tokenizer.setActiveTokenToNext()
+    }
+  }
+
+  #setActiveTokenAfterSentenceEndType(tokenizer) {
+    const tokenType = tokenizer.getActiveToken().getType()
+
+    if (this.#acceptedEndTypes.includes(tokenType)) {
+      tokenizer.setActiveTokenToNext()
     } else {
       // throw exception if acceptable end type not found after word(s)
     }
