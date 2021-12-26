@@ -11,7 +11,7 @@ export default class Sentence {
     this.words = this.#parseWords(tokenizer)
   }
   
-  getAllWords() {
+  getWords() {
     return this.words
   }
 
