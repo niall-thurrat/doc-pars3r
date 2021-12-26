@@ -11,7 +11,6 @@ export default class Word {
 
   #setChars(tokenizer) {
     const matchedChars = tokenizer.getActiveToken().getValue()
-    // TODO Throw exception if not a string or if not formatted as desired, ie contains invalid chars
     this.#chars = matchedChars
   }
 }

@@ -6,7 +6,6 @@ import Exclamation from './concrete-sentences/Exclamation.js'
 
 export default class Sentences {
   #sentences = []
-  #acceptedEndTypes = ['DOT', 'QUESTION-MARK', 'EXCLAMATION-MARK'] // not good cohesion but good not to bury this?
 
   constructor (tokenizer) {
     this.#setSentences(tokenizer)
@@ -31,14 +30,15 @@ export default class Sentences {
   #setSentences(tokenizer) {
     while (tokenizer.getActiveToken().getType() !== 'END') {
       this.#addSentence(tokenizer)
-      this.#setToNextSentence(tokenizer)
-      // TODO throw exception if ActiveToken type is not a word (beginning of a sentence) or END
+      this.#setToFirstTokenAfterSentence(tokenizer)
     }
   }
 
   #addSentence(tokenizer) {
     if (tokenizer.getActiveToken().getType() === 'WORD') {
       this.#add(this.#parseSentence(tokenizer))
+    } else {
+      // throw LexicalError exception - Error parsing new sentence: first token is not a word
     }
   }
 
@@ -50,28 +50,14 @@ export default class Sentences {
     if (sentence instanceof Sentence) {
       this.#sentences.push(sentence)
     } else {
-      // throw exception - trying to add non-Sentence item to Sentences
+      // throw TypeError exception - Cannot add a non-Sentence object to Sentences
     }
   }
 
-  #setToNextSentence(tokenizer) {
-    this.#setActiveTokenAfterWords(tokenizer)
-    this.#setActiveTokenAfterSentenceEndType(tokenizer)
-  }
-
-  #setActiveTokenAfterWords(tokenizer) {
+  #setToFirstTokenAfterSentence(tokenizer) {
     while (tokenizer.getActiveToken().getType() === 'WORD') {
       tokenizer.setActiveTokenToNext()
     }
-  }
-
-  #setActiveTokenAfterSentenceEndType(tokenizer) {
-    const tokenType = tokenizer.getActiveToken().getType()
-
-    if (this.#acceptedEndTypes.includes(tokenType)) {
-      tokenizer.setActiveTokenToNext()
-    } else {
-      // throw exception if acceptable end type not found after word(s)
-    }
+    tokenizer.setActiveTokenToNext()
   }
 }

@@ -20,7 +20,7 @@ export default class SentenceFactory {
         return new Exclamation(tokenizer)
         break
       default:
-        // throw exception // LEXICAL ERROR - remember this will pick up any symbol in the middle of sentences that is a no-match for the grammar
+        // throw LexicalError exception - Error parsing sentence: unsupported token type found after words
     }
   }
 

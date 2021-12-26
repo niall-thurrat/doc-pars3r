@@ -100,6 +100,16 @@ describe("Document.getSentences()", () => {
       expect(secondWordText).to.equal('bc')
     })
   })
+
+  describe("TCX_Find_no_sentences", () => {
+    it('should be an empty array', () => {
+      const doc = new Parser().parseDocument('')
+
+      const sentences = doc.getSentences()
+
+      expect(sentences).to.be.an('array').to.have.lengthOf(0)
+    })
+  })
 })
 
 describe("Document.getRegularSentences()", () => {

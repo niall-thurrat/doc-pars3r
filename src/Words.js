@@ -16,11 +16,13 @@ export default class Words {
   }
 
   #setWords(tokenizer) {
+    if (tokenizer.getActiveToken().getType() !== 'WORD') {
+      // throw ParsingGrammarError exception - No words found to parse
+    }
     while (tokenizer.getActiveToken().getType() === 'WORD') {
       this.#add(this.#parseWord(tokenizer))
       tokenizer.setActiveTokenToNext()
     }
-    // throw exception if empty - a sentence cant exist without words
   }
 
   #parseWord(tokenizer) {
@@ -30,6 +32,8 @@ export default class Words {
   #add(word) {
     if (word instanceof Word) {
       this.#words.push(word)
+    } else {
+      // throw TypeError exception - Cannot add a non-Word object to Words
     }
   }
 }
