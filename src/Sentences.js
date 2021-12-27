@@ -38,7 +38,7 @@ export default class Sentences {
     if (tokenizer.getActiveToken().getType() === 'WORD') {
       this.#add(this.#parseSentence(tokenizer))
     } else {
-      // throw LexicalError exception - Error parsing new sentence: first token is not a word
+      throw new Error('Error parsing sentence: first token is not a word')
     }
   }
 

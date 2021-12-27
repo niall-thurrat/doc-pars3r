@@ -110,6 +110,12 @@ describe("Document.getSentences()", () => {
       expect(sentences).to.be.an('array').to.have.lengthOf(0)
     })
   })
+
+  describe("TCX_Find_exception_for_sentence_with_no_words", () => {
+    it('should be an Error', () => {
+      expect(() => new Parser().parseDocument('.')).to.throw(Error)
+    })
+  })
 })
 
 describe("Document.getRegularSentences()", () => {
