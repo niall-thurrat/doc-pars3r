@@ -3,6 +3,7 @@ import Parser from '../src/Parser.js'
 import RegularSentence from '../src/concrete-sentences/RegularSentence.js'
 import Question from '../src/concrete-sentences/Question.js'
 import Exclamation from '../src/concrete-sentences/Exclamation.js'
+import SyntacticError from '../src/exceptions/SyntacticError.js'
 
 describe("Document.getSentences()", () => {
   describe("TC1_Find_a_regular_sentence", () => {
@@ -111,9 +112,15 @@ describe("Document.getSentences()", () => {
     })
   })
 
-  describe("TCX_Find_exception_for_sentence_with_no_words", () => {
-    it('should be an Error', () => {
-      expect(() => new Parser().parseDocument('.')).to.throw(Error)
+  describe("TCX_Get_exception_for_first_sentence_with_no_words", () => {
+    it('should be a SyntacticError', () => {
+      expect(() => new Parser().parseDocument('.')).to.throw(SyntacticError)
+    })
+  })
+
+  describe("TCX_Get_exception_for_second_sentence_with_no_words", () => {
+    it('should be a SyntacticError', () => {
+      expect(() => new Parser().parseDocument('a. .')).to.throw(SyntacticError)
     })
   })
 })

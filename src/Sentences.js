@@ -3,6 +3,7 @@ import Sentence from './Sentence.js'
 import RegularSentence from './concrete-sentences/RegularSentence.js'
 import Question from './concrete-sentences/Question.js'
 import Exclamation from './concrete-sentences/Exclamation.js'
+import SyntacticError from './exceptions/SyntacticError.js'
 
 export default class Sentences {
   #sentences = []
@@ -38,7 +39,7 @@ export default class Sentences {
     if (tokenizer.getActiveToken().getType() === 'WORD') {
       this.#add(this.#parseSentence(tokenizer))
     } else {
-      throw new Error('Error parsing sentence: first token is not a word')
+      throw new SyntacticError('Error parsing sentence: first token is not a word')
     }
   }
 
