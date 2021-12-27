@@ -16,9 +16,6 @@ export default class Words {
   }
 
   #setWords(tokenizer) {
-    if (tokenizer.getActiveToken().getType() !== 'WORD') {
-      // throw ParsingGrammarError exception - No words found to parse
-    }
     while (tokenizer.getActiveToken().getType() === 'WORD') {
       this.#add(this.#parseWord(tokenizer))
       tokenizer.setActiveTokenToNext()
