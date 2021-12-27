@@ -39,7 +39,7 @@ export default class Sentences {
     if (tokenizer.getActiveToken().getType() === 'WORD') {
       this.#add(this.#parseSentence(tokenizer))
     } else {
-      throw new SyntacticError('Error parsing sentence: first token is not a word')
+      this.#throwSyntacticErrorIfFirstTokenIsNotAWord()
     }
   }
 
@@ -60,5 +60,9 @@ export default class Sentences {
       tokenizer.setActiveTokenToNext()
     }
     tokenizer.setActiveTokenToNext()
+  }
+
+  #throwSyntacticErrorIfFirstTokenIsNotAWord() {
+    throw new SyntacticError('Error parsing sentence: first token is not a word')
   }
 }
