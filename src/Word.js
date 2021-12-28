@@ -1,7 +1,7 @@
 export default class Word {
   #chars
 
-  constructor (tokenizer) {
+  constructor(tokenizer) {
     this.#setChars(tokenizer)
   }
   

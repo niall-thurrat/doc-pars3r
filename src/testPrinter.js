@@ -1,7 +1,7 @@
 import Parser from './Parser.js'
 
 const parser = new Parser()
-let d = parser.parseDocument('+.')
+const d = parser.parseDocument('+.')
 const s = d.getSentences()
 
 // console.log(`Test - s.length(): ${s.length}`)

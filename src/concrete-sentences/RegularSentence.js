@@ -3,7 +3,7 @@ import Sentence from '../Sentence.js'
 export default class RegularSentence extends Sentence {
   #endType = '.'
 
-  constructor (tokenizer) {
+  constructor(tokenizer) {
     super(tokenizer)
     this.toString = function() {
       return `${this.words.toString()}${this.#endType}`

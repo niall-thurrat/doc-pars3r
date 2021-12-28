@@ -4,7 +4,7 @@ import CompileTimeError from './exceptions/CompileTimeError.js'
 export default class Sentence {
   words
 
-  constructor (tokenizer) {
+  constructor(tokenizer) {
     this.#throwCompileTimeErrorIfAbstractClassInstantiated()
     this.words = this.#parseWords(tokenizer)
   }

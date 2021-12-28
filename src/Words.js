@@ -3,7 +3,7 @@ import Word from './Word.js'
 export default class Words {
   #words = []
 
-  constructor (tokenizer) {
+  constructor(tokenizer) {
     this.#setWords(tokenizer)
 
     this.toString = function() {
@@ -27,11 +27,10 @@ export default class Words {
   }
 
   #add(word) {
-    if (word instanceof Word) {
+    if (word instanceof Word)
       this.#words.push(word)
-    } else {
+    else
       this.#throwTypeErrorIfTryingToAddNonWord()
-    }
   }
 
   #throwTypeErrorIfTryingToAddNonWord() {

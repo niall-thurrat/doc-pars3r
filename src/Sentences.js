@@ -8,7 +8,7 @@ import SyntacticError from './exceptions/SyntacticError.js'
 export default class Sentences {
   #sentences = []
 
-  constructor (tokenizer) {
+  constructor(tokenizer) {
     this.#setSentences(tokenizer)
   }
 
@@ -36,11 +36,10 @@ export default class Sentences {
   }
 
   #addSentence(tokenizer) {
-    if (tokenizer.getActiveToken().getType() === 'WORD') {
+    if (tokenizer.getActiveToken().getType() === 'WORD')
       this.#add(this.#parseSentence(tokenizer))
-    } else {
+    else
       this.#throwSyntacticErrorIfFirstTokenIsNotAWord()
-    }
   }
 
   #parseSentence(tokenizer) {
@@ -48,11 +47,10 @@ export default class Sentences {
   }
 
   #add(sentence) {
-    if (sentence instanceof Sentence) {
+    if (sentence instanceof Sentence)
       this.#sentences.push(sentence)
-    } else {
+    else
       this.#throwTypeErrorIfTryingToAddNonSentence()
-    }
   }
 
   #setToFirstTokenAfterSentence(tokenizer) {
