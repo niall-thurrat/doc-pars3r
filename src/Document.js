@@ -1,15 +1,13 @@
 import Tokenizer from 'tokeniz3r'
 import Sentences from './Sentences.js'
+import TokenizerError from './exceptions/TokenizerError.js'
 
 export default class Document {
   #sentences
 
   constructor(tokenizer) {
     this.#sentences = this.#parseSentences(tokenizer)
-    
-    if (tokenizer.getActiveToken().getType() !== 'END') {
-      // TODO throw exception
-    }
+    this.#throwTokenizerErrorIfNoEndToken(tokenizer)
   }
 
   getSentences() {
@@ -30,5 +28,10 @@ export default class Document {
   
   #parseSentences(tokenizer) {
     return new Sentences(tokenizer)
+  }
+
+  #throwTokenizerErrorIfNoEndToken(tokenizer) {
+    if (tokenizer.getActiveToken().getType() !== 'END')
+      throw new TokenizerError('No END token after Sentences parsed')
   }
 }

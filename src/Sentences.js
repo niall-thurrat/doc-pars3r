@@ -51,7 +51,7 @@ export default class Sentences {
     if (sentence instanceof Sentence) {
       this.#sentences.push(sentence)
     } else {
-      // throw TypeError exception - Cannot add a non-Sentence object to Sentences
+      this.#throwTypeErrorIfTryingToAddNonSentence()
     }
   }
 
@@ -64,5 +64,9 @@ export default class Sentences {
 
   #throwSyntacticErrorIfFirstTokenIsNotAWord() {
     throw new SyntacticError('Error parsing sentence: first token is not a word')
+  }
+
+  #throwTypeErrorIfTryingToAddNonSentence() {
+    throw new TypeError('Cannot add a non-Sentence object to Sentences')
   }
 }

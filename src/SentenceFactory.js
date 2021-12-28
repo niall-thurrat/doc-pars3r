@@ -1,6 +1,7 @@
 import RegularSentence from './concrete-sentences/RegularSentence.js'
 import Question from './concrete-sentences/Question.js'
 import Exclamation from './concrete-sentences/Exclamation.js'
+import SyntacticError from './exceptions/SyntacticError.js'
 
 export default class SentenceFactory {
   #tokenIndex = 0
@@ -20,7 +21,7 @@ export default class SentenceFactory {
         return new Exclamation(tokenizer)
         break
       default:
-        // throw LexicalError exception - Error parsing sentence: unsupported token type found after words
+        this.#throwSyntacticErrorIfNotAcceptedEndType()
     }
   }
 
@@ -42,5 +43,9 @@ export default class SentenceFactory {
       tokenizer.setActiveTokenToPrevious()
       this.#tokenIndex--
     }
+  }
+
+  #throwSyntacticErrorIfNotAcceptedEndType() {
+    throw new SyntacticError('Token found after words is not an accepted sentence end type')
   }
 }

@@ -2,7 +2,7 @@ import Parser from './Parser.js'
 
 const parser = new Parser()
 let d = parser.parseDocument('+.')
-const s = d.getSentences() // throw exception if doc not parsed yet
+const s = d.getSentences()
 
 // console.log(`Test - s.length(): ${s.length}`)
 // console.log(`Test - s[0].toString(): ${s[0].toString()}`)

@@ -30,7 +30,11 @@ export default class Words {
     if (word instanceof Word) {
       this.#words.push(word)
     } else {
-      // throw TypeError exception - Cannot add a non-Word object to Words
+      this.#throwTypeErrorIfTryingToAddNonWord()
     }
+  }
+
+  #throwTypeErrorIfTryingToAddNonWord() {
+    throw new TypeError('Cannot add a non-Word object to Words')
   }
 }
