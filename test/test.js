@@ -103,7 +103,7 @@ describe('Document.getSentences()', () => {
     })
   })
 
-  describe('TCX_Find_no_sentences', () => {
+  describe('TC9_Find_no_sentences', () => {
     it('should be an empty array', () => {
       const doc = new Parser().parseDocument('')
 
@@ -113,13 +113,13 @@ describe('Document.getSentences()', () => {
     })
   })
 
-  describe('TCX_Get_exception_for_first_sentence_with_no_words', () => {
+  describe('TC10_Get_exception_for_first_sentence_with_no_words', () => {
     it('should be a SyntacticError', () => {
       expect(() => new Parser().parseDocument('.')).to.throw(SyntacticError)
     })
   })
 
-  describe('TCX_Get_exception_for_second_sentence_with_no_words', () => {
+  describe('TC11_Get_exception_for_second_sentence_with_no_words', () => {
     it('should be a Error', () => {
       expect(() => new Parser().parseDocument('+.')).to.throw(LexicalInputError)
     })
@@ -127,7 +127,7 @@ describe('Document.getSentences()', () => {
 })
 
 describe('Document.getRegularSentences()', () => {
-  describe('TC9_Find_a_regular_sentence_without_excluding_other_types', () => {
+  describe('TC12_Find_a_regular_sentence_without_excluding_other_types', () => {
     it('should be an array with a single RegularSentence object', () => {
       const doc = new Parser().parseDocument('a.')
 
@@ -138,7 +138,7 @@ describe('Document.getRegularSentences()', () => {
     })
   })
 
-  describe('TC10_Find_2_regular_sentences_without_excluding_other_types', () => {
+  describe('TC13_Find_2_regular_sentences_without_excluding_other_types', () => {
     it('should be an array with 2 RegularSentence objects', () => {
       const doc = new Parser().parseDocument('a. b.')
 
@@ -151,7 +151,7 @@ describe('Document.getRegularSentences()', () => {
     })
   })
 
-  describe('TC11_Find_a_regular_sentence_and_exclude_other_types_after', () => {
+  describe('TC14_Find_a_regular_sentence_and_exclude_other_types_after', () => {
     it('should be an array with a single RegularSentence object', () => {
       const doc = new Parser().parseDocument('a. b? c!')
 
@@ -162,7 +162,7 @@ describe('Document.getRegularSentences()', () => {
     })
   })
 
-  describe('TC12_Find_a_regular_sentence_and_exclude_other_types_before', () => {
+  describe('TC15_Find_a_regular_sentence_and_exclude_other_types_before', () => {
     it('should be an array with a single RegularSentence object', () => {
       const doc = new Parser().parseDocument('a! b? c.')
 
@@ -173,7 +173,7 @@ describe('Document.getRegularSentences()', () => {
     })
   })
 
-  describe('TC13_Find_2_regular_sentences_and_exclude_other_types_inbetween', () => {
+  describe('TC16_Find_2_regular_sentences_and_exclude_other_types_inbetween', () => {
     it('should be an array with 2 RegularSentence objects', () => {
       const doc = new Parser().parseDocument('a. b? c! d.')
 
@@ -186,7 +186,7 @@ describe('Document.getRegularSentences()', () => {
     })
   })
 
-  describe('TC14_Find_no_regular_sentences_and_exclude_other_types', () => {
+  describe('TC17_Find_no_regular_sentences_and_exclude_other_types', () => {
     it('should be an empty array', () => {
       const doc = new Parser().parseDocument('a? b!')
 
@@ -198,7 +198,7 @@ describe('Document.getRegularSentences()', () => {
 })
 
 describe('Document.getQuestions()', () => {
-  describe('TC15_Find_a_question_without_excluding_other_types', () => {
+  describe('TC18_Find_a_question_without_excluding_other_types', () => {
     it('should be an array with a single Question object', () => {
       const doc = new Parser().parseDocument('a?')
 
@@ -209,7 +209,7 @@ describe('Document.getQuestions()', () => {
     })
   })
 
-  describe('TC16_Find_2_questions_without_excluding_other_types', () => {
+  describe('TC19_Find_2_questions_without_excluding_other_types', () => {
     it('should be an array with 2 Question objects', () => {
       const doc = new Parser().parseDocument('a? b?')
 
@@ -222,7 +222,7 @@ describe('Document.getQuestions()', () => {
     })
   })
 
-  describe('TC17_Find_a_question_and_exclude_other_types_After', () => {
+  describe('TC120_Find_a_question_and_exclude_other_types_After', () => {
     it('should be an array with a single Question object', () => {
       const doc = new Parser().parseDocument('a? b. c!')
 
@@ -233,7 +233,7 @@ describe('Document.getQuestions()', () => {
     })
   })
 
-  describe('TC18_Find_a_question_and_exclude_other_types_before', () => {
+  describe('TC21_Find_a_question_and_exclude_other_types_before', () => {
     it('should be an array with a single Question object', () => {
       const doc = new Parser().parseDocument('a? b. c!')
 
@@ -244,7 +244,7 @@ describe('Document.getQuestions()', () => {
     })
   })
 
-  describe('TC19_Find_2_questions_and_exclude_other_types_inbetween', () => {
+  describe('TC22_Find_2_questions_and_exclude_other_types_inbetween', () => {
     it('should be an array with 2 Question objects', () => {
       const doc = new Parser().parseDocument('a? b. c! d?')
 
@@ -257,7 +257,7 @@ describe('Document.getQuestions()', () => {
     })
   })
 
-  describe('TC20_Find_no_questions_and_exclude_other_types', () => {
+  describe('TC23_Find_no_questions_and_exclude_other_types', () => {
     it('should be an empty array', () => {
       const doc = new Parser().parseDocument('a. b!')
 
@@ -269,7 +269,7 @@ describe('Document.getQuestions()', () => {
 })
 
 describe('Document.getExclamations()', () => {
-  describe('TC15_Find_an_exclamation_without_excluding_other_types', () => {
+  describe('TC24_Find_an_exclamation_without_excluding_other_types', () => {
     it('should be an array with a single Exclamation object', () => {
       const doc = new Parser().parseDocument('a!')
 
@@ -280,7 +280,7 @@ describe('Document.getExclamations()', () => {
     })
   })
 
-  describe('TC16_Find_2_exclamations_without_excluding_other_types', () => {
+  describe('TC25_Find_2_exclamations_without_excluding_other_types', () => {
     it('should be an array with 2 Exclamation objects', () => {
       const doc = new Parser().parseDocument('a! b!')
 
@@ -293,7 +293,7 @@ describe('Document.getExclamations()', () => {
     })
   })
 
-  describe('TC17_Find_an_exclamation_and_exclude_other_types_After', () => {
+  describe('TC26_Find_an_exclamation_and_exclude_other_types_After', () => {
     it('should be an array with a single Exclamation object', () => {
       const doc = new Parser().parseDocument('a! b. c?')
 
@@ -304,7 +304,7 @@ describe('Document.getExclamations()', () => {
     })
   })
 
-  describe('TC18_Find_an_exclamation_and_exclude_other_types_before', () => {
+  describe('TC27_Find_an_exclamation_and_exclude_other_types_before', () => {
     it('should be an array with a single Exclamation object', () => {
       const doc = new Parser().parseDocument('a! b. c?')
 
@@ -315,7 +315,7 @@ describe('Document.getExclamations()', () => {
     })
   })
 
-  describe('TC19_Find_2_exclamations_and_exclude_other_types_inbetween', () => {
+  describe('TC28_Find_2_exclamations_and_exclude_other_types_inbetween', () => {
     it('should be an array with 2 Exclamation objects', () => {
       const doc = new Parser().parseDocument('a! b. c? d!')
 
@@ -328,7 +328,7 @@ describe('Document.getExclamations()', () => {
     })
   })
 
-  describe('TC20_Find_no_exclamations_and_exclude_other_types', () => {
+  describe('TC29_Find_no_exclamations_and_exclude_other_types', () => {
     it('should be an empty array', () => {
       const doc = new Parser().parseDocument('a. b?')
 
