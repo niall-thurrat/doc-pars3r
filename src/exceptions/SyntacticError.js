@@ -1,5 +1,5 @@
 export default class SyntacticError extends Error {
-  constructor(message) {
+  constructor (message) {
     super(message)
     this.name = 'SyntacticError'
   }
