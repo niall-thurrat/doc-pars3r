@@ -33,13 +33,25 @@ git clone git@gitlab.lnu.se:1dv610/student/nt222fc/l2.git
 npm install
 ```
 
-3. Import Doc-pars3r to your desired Node.js project.
+3. Make your Doc-pars3r module available to link locally to other projects as a dependency. Run the following command from the root of your Doc-pars3r module:
+```
+npm link
+```
+
+NOTE: Steps 3 and 4 here are required because doc-pars3r is under development and is not published to npm. THEREFORE, DOC-PARS3R SHOULD NOT AT PRESENT BE USED IN A PRODUCTION ENVIRONMENT.
+
+4. Link Doc-pars3r locally to your own npm project. Run the following command from the root of your project:
+```
+npm link doc-pars3r
+```
+
+5. Import Doc-pars3r to your desired Node.js project.
 
 ```javascript
 import Parser from 'doc-pars3r'
 ```
 
-4. Use a Doc-pars3r instance to generate a parsed document.
+6. Use a Doc-pars3r instance to generate a parsed document.
 
 ```javascript
 const parser = new Parser()
@@ -86,3 +98,36 @@ This object has two public methods:
 This object has one public method:
 
 - getMatchedText() - returns a string of characters that have matched the WORD grammar rule.
+
+## Example use
+
+```javascript
+import Parser from 'doc-pars3r'
+
+const parser = new Parser()
+const inputStr = 'One sentence. Two sentences? Three sentences!'
+const doc = parser.parseDocument(inputStr)
+
+const sentencesArr = doc.getSentences()
+
+console.log(`Number of all sentences: ${sentencesArr.length}`)
+console.log(`First sentence words: ${sentencesArr[0].getWords()}`)
+console.log(`First sentence closing punctuation: ${sentencesArr[0].getEndPunctuation()}`)
+console.log(`First sentence: ${sentencesArr[0].toString()}`)
+
+const sentence3WordsObj = sentencesArr[2].getWords()
+const wordsArr = sentence3WordsObj.getAll()
+
+console.log(`First word of third sentence: ${wordsArr[0].getMatchedText()}`)
+
+const questionsArr = doc.getQuestions()
+
+console.log(`First question: ${questionsArr[0].toString()}`)
+
+// Number of all sentences: 3
+// First sentence words: One sentence
+// First sentence closing punctuation: .
+// First sentence: One sentence.
+// First word of third sentence: Three
+// First question: Two sentences?
+```
