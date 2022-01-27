@@ -7,8 +7,8 @@ import SyntacticError from '../src/exceptions/SyntacticError.js'
 import LexicalInputError from '../src/exceptions/LexicalInputError.js'
 
 describe('Document.getSentences()', () => {
-  describe('TC1_Find_a_regular_sentence', () => {
-    it('should be an array with a single RegularSentence object', () => {
+  describe('TC1_Find_a_regular_sentence (Indata: \'a.\')', () => {
+    it('Expected outcome: an array with a single RegularSentence object', () => {
       const doc = new Parser().parseDocument('a.')
 
       const sentences = doc.getSentences()
@@ -18,8 +18,8 @@ describe('Document.getSentences()', () => {
     })
   })
 
-  describe('TC2_Find_a_question', () => {
-    it('should be an array with a single Question object', () => {
+  describe('TC2_Find_a_question (Indata: \'a?\')', () => {
+    it('Expected outcome: an array with a single Question object', () => {
       const doc = new Parser().parseDocument('a?')
 
       const sentences = doc.getSentences()
@@ -29,8 +29,8 @@ describe('Document.getSentences()', () => {
     })
   })
 
-  describe('TC3_Find_an_exclamation', () => {
-    it('should be an array with a single Exclamation object', () => {
+  describe('TC3_Find_an_exclamation (Indata: \'a!\')', () => {
+    it('Expected outcome: an array with a single Exclamation object', () => {
       const doc = new Parser().parseDocument('a!')
 
       const sentences = doc.getSentences()
@@ -40,8 +40,8 @@ describe('Document.getSentences()', () => {
     })
   })
 
-  describe('TC4_Find_multiple_sentences_of_different_types', () => {
-    it('should be an array with 3 different type objects: RegularSentence, Question and Exclamation', () => {
+  describe('TC4_Find_multiple_sentences_of_different_types (Indata: \'a. b? c!\')', () => {
+    it('Expected outcome: an array with 3 different type objects: RegularSentence, Question and Exclamation', () => {
       const doc = new Parser().parseDocument('a. b? c!')
 
       const sentences = doc.getSentences()
@@ -53,8 +53,8 @@ describe('Document.getSentences()', () => {
     })
   })
 
-  describe('TC5_Correct_number_of_words_in_first_sentence', () => {
-    it('should be a sentence with 2 words', () => {
+  describe('TC5_Correct_number_of_words_in_first_sentence (Indata: \'a b.\')', () => {
+    it('Expected outcome: a sentence with 2 words', () => {
       const doc = new Parser().parseDocument('a b.')
 
       const sentences = doc.getSentences()
@@ -65,8 +65,8 @@ describe('Document.getSentences()', () => {
     })
   })
 
-  describe('TC6_Correct_number_of_words_in_second_sentence', () => {
-    it('should be a sentence with 2 words', () => {
+  describe('TC6_Correct_number_of_words_in_second_sentence (Indata: \'a. b c.\')', () => {
+    it('Expected outcome: a sentence with 2 words', () => {
       const doc = new Parser().parseDocument('a. b c.')
 
       const sentences = doc.getSentences()
@@ -77,8 +77,8 @@ describe('Document.getSentences()', () => {
     })
   })
 
-  describe('TC7_First_word_has_the_correct_letters', () => {
-    it('should be the word \'ab\'', () => {
+  describe('TC7_First_word_has_the_correct_letters (Indata: \'ab.\')', () => {
+    it('Expected outcome: the word \'ab\'', () => {
       const doc = new Parser().parseDocument('ab.')
 
       const sentences = doc.getSentences()
@@ -90,8 +90,8 @@ describe('Document.getSentences()', () => {
     })
   })
 
-  describe('TC8_Second_word_has_the_correct_letters', () => {
-    it('should be the word \'bc\'', () => {
+  describe('TC8_Second_word_has_the_correct_letters (Indata: \'a bc.\')', () => {
+    it('Expected outcome: the word \'bc\'', () => {
       const doc = new Parser().parseDocument('a bc.')
 
       const sentences = doc.getSentences()
@@ -103,8 +103,8 @@ describe('Document.getSentences()', () => {
     })
   })
 
-  describe('TC9_Find_no_sentences', () => {
-    it('should be an empty array', () => {
+  describe('TC9_Find_no_sentences (Indata: \'\')', () => {
+    it('Expected outcome: an empty array', () => {
       const doc = new Parser().parseDocument('')
 
       const sentences = doc.getSentences()
@@ -113,22 +113,22 @@ describe('Document.getSentences()', () => {
     })
   })
 
-  describe('TC10_Get_exception_for_first_sentence_with_no_words', () => {
-    it('should be a SyntacticError', () => {
+  describe('TC10_Get_exception_for_first_sentence_with_no_words (Indata: \'.\')', () => {
+    it('Expected outcome: a SyntacticError', () => {
       expect(() => new Parser().parseDocument('.')).to.throw(SyntacticError)
     })
   })
 
-  describe('TC11_Get_exception_for_second_sentence_with_no_words', () => {
-    it('should be a Error', () => {
+  describe('TC11_Get_exception_for_second_sentence_with_no_words (Indata: \'+.\')', () => {
+    it('Expected outcome: a LexicalInputError', () => {
       expect(() => new Parser().parseDocument('+.')).to.throw(LexicalInputError)
     })
   })
 })
 
 describe('Document.getRegularSentences()', () => {
-  describe('TC12_Find_a_regular_sentence_without_excluding_other_types', () => {
-    it('should be an array with a single RegularSentence object', () => {
+  describe('TC12_Find_a_regular_sentence_without_excluding_other_types (Indata: \'a.\')', () => {
+    it('Expected outcome: an array with a single RegularSentence object', () => {
       const doc = new Parser().parseDocument('a.')
 
       const regSentences = doc.getRegularSentences()
@@ -138,8 +138,8 @@ describe('Document.getRegularSentences()', () => {
     })
   })
 
-  describe('TC13_Find_2_regular_sentences_without_excluding_other_types', () => {
-    it('should be an array with 2 RegularSentence objects', () => {
+  describe('TC13_Find_2_regular_sentences_without_excluding_other_types (Indata: \'a. b.\')', () => {
+    it('Expected outcome: an array with 2 RegularSentence objects', () => {
       const doc = new Parser().parseDocument('a. b.')
 
       const regSentences = doc.getRegularSentences()
@@ -151,8 +151,8 @@ describe('Document.getRegularSentences()', () => {
     })
   })
 
-  describe('TC14_Find_a_regular_sentence_and_exclude_other_types_after', () => {
-    it('should be an array with a single RegularSentence object', () => {
+  describe('TC14_Find_a_regular_sentence_and_exclude_other_types_after (Indata: \'a. b? c!\')', () => {
+    it('Expected outcome: an array with a single RegularSentence object', () => {
       const doc = new Parser().parseDocument('a. b? c!')
 
       const regSentences = doc.getRegularSentences()
@@ -162,8 +162,8 @@ describe('Document.getRegularSentences()', () => {
     })
   })
 
-  describe('TC15_Find_a_regular_sentence_and_exclude_other_types_before', () => {
-    it('should be an array with a single RegularSentence object', () => {
+  describe('TC15_Find_a_regular_sentence_and_exclude_other_types_before (Indata: \'a! b? c.\')', () => {
+    it('Expected outcome: an array with a single RegularSentence object', () => {
       const doc = new Parser().parseDocument('a! b? c.')
 
       const regSentences = doc.getRegularSentences()
@@ -173,8 +173,8 @@ describe('Document.getRegularSentences()', () => {
     })
   })
 
-  describe('TC16_Find_2_regular_sentences_and_exclude_other_types_inbetween', () => {
-    it('should be an array with 2 RegularSentence objects', () => {
+  describe('TC16_Find_2_regular_sentences_and_exclude_other_types_inbetween (Indata: \'a. b? c! d.\')', () => {
+    it('Expected outcome: an array with 2 RegularSentence objects', () => {
       const doc = new Parser().parseDocument('a. b? c! d.')
 
       const regSentences = doc.getRegularSentences()
@@ -186,8 +186,8 @@ describe('Document.getRegularSentences()', () => {
     })
   })
 
-  describe('TC17_Find_no_regular_sentences_and_exclude_other_types', () => {
-    it('should be an empty array', () => {
+  describe('TC17_Find_no_regular_sentences_and_exclude_other_types (Indata: \'a? b!\')', () => {
+    it('Expected outcome: an empty array', () => {
       const doc = new Parser().parseDocument('a? b!')
 
       const regSentences = doc.getRegularSentences()
@@ -198,8 +198,8 @@ describe('Document.getRegularSentences()', () => {
 })
 
 describe('Document.getQuestions()', () => {
-  describe('TC18_Find_a_question_without_excluding_other_types', () => {
-    it('should be an array with a single Question object', () => {
+  describe('TC18_Find_a_question_without_excluding_other_types (Indata: \'a?\')', () => {
+    it('Expected outcome: an array with a single Question object', () => {
       const doc = new Parser().parseDocument('a?')
 
       const questions = doc.getQuestions()
@@ -209,8 +209,8 @@ describe('Document.getQuestions()', () => {
     })
   })
 
-  describe('TC19_Find_2_questions_without_excluding_other_types', () => {
-    it('should be an array with 2 Question objects', () => {
+  describe('TC19_Find_2_questions_without_excluding_other_types (Indata: \'a? b?\')', () => {
+    it('Expected outcome: an array with 2 Question objects', () => {
       const doc = new Parser().parseDocument('a? b?')
 
       const questions = doc.getQuestions()
@@ -222,8 +222,8 @@ describe('Document.getQuestions()', () => {
     })
   })
 
-  describe('TC120_Find_a_question_and_exclude_other_types_After', () => {
-    it('should be an array with a single Question object', () => {
+  describe('TC120_Find_a_question_and_exclude_other_types_After (Indata: \'a? b. c!\')', () => {
+    it('Expected outcome: an array with a single Question object', () => {
       const doc = new Parser().parseDocument('a? b. c!')
 
       const questions = doc.getQuestions()
@@ -233,9 +233,9 @@ describe('Document.getQuestions()', () => {
     })
   })
 
-  describe('TC21_Find_a_question_and_exclude_other_types_before', () => {
-    it('should be an array with a single Question object', () => {
-      const doc = new Parser().parseDocument('a? b. c!')
+  describe('TC21_Find_a_question_and_exclude_other_types_before (Indata: \'a. b! c?\')', () => {
+    it('Expected outcome: an array with a single Question object', () => {
+      const doc = new Parser().parseDocument('a. b! c?')
 
       const questions = doc.getQuestions()
 
@@ -244,8 +244,8 @@ describe('Document.getQuestions()', () => {
     })
   })
 
-  describe('TC22_Find_2_questions_and_exclude_other_types_inbetween', () => {
-    it('should be an array with 2 Question objects', () => {
+  describe('TC22_Find_2_questions_and_exclude_other_types_inbetween (Indata: \'a? b. c! d?\')', () => {
+    it('Expected outcome: an array with 2 Question objects', () => {
       const doc = new Parser().parseDocument('a? b. c! d?')
 
       const questions = doc.getQuestions()
@@ -257,8 +257,8 @@ describe('Document.getQuestions()', () => {
     })
   })
 
-  describe('TC23_Find_no_questions_and_exclude_other_types', () => {
-    it('should be an empty array', () => {
+  describe('TC23_Find_no_questions_and_exclude_other_types (Indata: \'a. b!\')', () => {
+    it('Expected outcome: an empty array', () => {
       const doc = new Parser().parseDocument('a. b!')
 
       const questions = doc.getQuestions()
@@ -269,8 +269,8 @@ describe('Document.getQuestions()', () => {
 })
 
 describe('Document.getExclamations()', () => {
-  describe('TC24_Find_an_exclamation_without_excluding_other_types', () => {
-    it('should be an array with a single Exclamation object', () => {
+  describe('TC24_Find_an_exclamation_without_excluding_other_types (Indata: \'a!\')', () => {
+    it('Expected outcome: an array with a single Exclamation object', () => {
       const doc = new Parser().parseDocument('a!')
 
       const exclamations = doc.getExclamations()
@@ -280,8 +280,8 @@ describe('Document.getExclamations()', () => {
     })
   })
 
-  describe('TC25_Find_2_exclamations_without_excluding_other_types', () => {
-    it('should be an array with 2 Exclamation objects', () => {
+  describe('TC25_Find_2_exclamations_without_excluding_other_types (Indata: \'a! b!\')', () => {
+    it('Expected outcome: an array with 2 Exclamation objects', () => {
       const doc = new Parser().parseDocument('a! b!')
 
       const exclamations = doc.getExclamations()
@@ -293,8 +293,8 @@ describe('Document.getExclamations()', () => {
     })
   })
 
-  describe('TC26_Find_an_exclamation_and_exclude_other_types_After', () => {
-    it('should be an array with a single Exclamation object', () => {
+  describe('TC26_Find_an_exclamation_and_exclude_other_types_After (Indata: \'a! b. c?\')', () => {
+    it('Expected outcome: an array with a single Exclamation object', () => {
       const doc = new Parser().parseDocument('a! b. c?')
 
       const exclamations = doc.getExclamations()
@@ -304,9 +304,9 @@ describe('Document.getExclamations()', () => {
     })
   })
 
-  describe('TC27_Find_an_exclamation_and_exclude_other_types_before', () => {
-    it('should be an array with a single Exclamation object', () => {
-      const doc = new Parser().parseDocument('a! b. c?')
+  describe('TC27_Find_an_exclamation_and_exclude_other_types_before (Indata: \'a? b. c!\')', () => {
+    it('Expected outcome: an array with a single Exclamation object', () => {
+      const doc = new Parser().parseDocument('a. b? c!')
 
       const exclamations = doc.getExclamations()
 
@@ -315,8 +315,8 @@ describe('Document.getExclamations()', () => {
     })
   })
 
-  describe('TC28_Find_2_exclamations_and_exclude_other_types_inbetween', () => {
-    it('should be an array with 2 Exclamation objects', () => {
+  describe('TC28_Find_2_exclamations_and_exclude_other_types_inbetween (Indata: \'a! b. c? d!\')', () => {
+    it('Expected outcome: an array with 2 Exclamation objects', () => {
       const doc = new Parser().parseDocument('a! b. c? d!')
 
       const exclamations = doc.getExclamations()
@@ -328,8 +328,8 @@ describe('Document.getExclamations()', () => {
     })
   })
 
-  describe('TC29_Find_no_exclamations_and_exclude_other_types', () => {
-    it('should be an empty array', () => {
+  describe('TC29_Find_no_exclamations_and_exclude_other_types (Indata: \'a. b?\')', () => {
+    it('Expected outcome: an empty array', () => {
       const doc = new Parser().parseDocument('a. b?')
 
       const exclamations = doc.getExclamations()

@@ -4,7 +4,7 @@ A module that parses text documents!!!
 
 ## What is a Document Parser?
 
-A parser is used to give syntactic meaning to the various parts of a language. Doc-pars3r uses Tokenis3r to break an input text into tokens (words and closing punctuations), then builds a document from these that consists of various sentence types.
+A parser is used to analyse the various parts of a language or data structure. Doc-pars3r uses Tokenis3r to break an input text into tokens (words and closing punctuations), then builds a document from these that consists of various sentence types.
 
 Note: Doc-pars3r is very much a work in progress and at present only parses 3 different sentence types: regular sentences, questions and exclamations. It requires further work to handle other aspects of written documents, such as mid-sentence punctuation, paragraphs, titles, etc. It is for this reason that the module has not been published to npm.
 
@@ -130,4 +130,12 @@ console.log(`First question: ${questionsArr[0].toString()}`)
 // First sentence: One sentence.
 // First word of third sentence: Three
 // First question: Two sentences?
+```
+
+## How to test Doc-Pars3r
+
+When you have completed steps 1 and 2 under *Using Doc-pars3r* above, use the following command to run the mocha test suite:
+
+```
+npm test
 ```
