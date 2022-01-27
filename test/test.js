@@ -119,7 +119,13 @@ describe('Document.getSentences()', () => {
     })
   })
 
-  describe('TC11_Get_exception_for_second_sentence_with_no_words (Indata: \'+.\')', () => {
+  describe('TC11_Get_exception_for_second_sentence_with_no_words (Indata: \'a. .\')', () => {
+    it('Expected outcome: a SyntacticError', () => {
+      expect(() => new Parser().parseDocument('a. .')).to.throw(SyntacticError)
+    })
+  })
+
+  describe('TC12_Get_exception_for_non_word_symbol (Indata: \'+.\')', () => {
     it('Expected outcome: a LexicalInputError', () => {
       expect(() => new Parser().parseDocument('+.')).to.throw(LexicalInputError)
     })
@@ -127,7 +133,7 @@ describe('Document.getSentences()', () => {
 })
 
 describe('Document.getRegularSentences()', () => {
-  describe('TC12_Find_a_regular_sentence_without_excluding_other_types (Indata: \'a.\')', () => {
+  describe('TC13_Find_a_regular_sentence_without_excluding_other_types (Indata: \'a.\')', () => {
     it('Expected outcome: an array with a single RegularSentence object', () => {
       const doc = new Parser().parseDocument('a.')
 
@@ -138,7 +144,7 @@ describe('Document.getRegularSentences()', () => {
     })
   })
 
-  describe('TC13_Find_2_regular_sentences_without_excluding_other_types (Indata: \'a. b.\')', () => {
+  describe('TC14_Find_2_regular_sentences_without_excluding_other_types (Indata: \'a. b.\')', () => {
     it('Expected outcome: an array with 2 RegularSentence objects', () => {
       const doc = new Parser().parseDocument('a. b.')
 
@@ -151,7 +157,7 @@ describe('Document.getRegularSentences()', () => {
     })
   })
 
-  describe('TC14_Find_a_regular_sentence_and_exclude_other_types_after (Indata: \'a. b? c!\')', () => {
+  describe('TC15_Find_a_regular_sentence_and_exclude_other_types_after (Indata: \'a. b? c!\')', () => {
     it('Expected outcome: an array with a single RegularSentence object', () => {
       const doc = new Parser().parseDocument('a. b? c!')
 
@@ -162,7 +168,7 @@ describe('Document.getRegularSentences()', () => {
     })
   })
 
-  describe('TC15_Find_a_regular_sentence_and_exclude_other_types_before (Indata: \'a! b? c.\')', () => {
+  describe('TC16_Find_a_regular_sentence_and_exclude_other_types_before (Indata: \'a! b? c.\')', () => {
     it('Expected outcome: an array with a single RegularSentence object', () => {
       const doc = new Parser().parseDocument('a! b? c.')
 
@@ -173,7 +179,7 @@ describe('Document.getRegularSentences()', () => {
     })
   })
 
-  describe('TC16_Find_2_regular_sentences_and_exclude_other_types_inbetween (Indata: \'a. b? c! d.\')', () => {
+  describe('TC17_Find_2_regular_sentences_and_exclude_other_types_inbetween (Indata: \'a. b? c! d.\')', () => {
     it('Expected outcome: an array with 2 RegularSentence objects', () => {
       const doc = new Parser().parseDocument('a. b? c! d.')
 
@@ -186,7 +192,7 @@ describe('Document.getRegularSentences()', () => {
     })
   })
 
-  describe('TC17_Find_no_regular_sentences_and_exclude_other_types (Indata: \'a? b!\')', () => {
+  describe('TC18_Find_no_regular_sentences_and_exclude_other_types (Indata: \'a? b!\')', () => {
     it('Expected outcome: an empty array', () => {
       const doc = new Parser().parseDocument('a? b!')
 
@@ -198,7 +204,7 @@ describe('Document.getRegularSentences()', () => {
 })
 
 describe('Document.getQuestions()', () => {
-  describe('TC18_Find_a_question_without_excluding_other_types (Indata: \'a?\')', () => {
+  describe('TC19_Find_a_question_without_excluding_other_types (Indata: \'a?\')', () => {
     it('Expected outcome: an array with a single Question object', () => {
       const doc = new Parser().parseDocument('a?')
 
@@ -209,7 +215,7 @@ describe('Document.getQuestions()', () => {
     })
   })
 
-  describe('TC19_Find_2_questions_without_excluding_other_types (Indata: \'a? b?\')', () => {
+  describe('TC20_Find_2_questions_without_excluding_other_types (Indata: \'a? b?\')', () => {
     it('Expected outcome: an array with 2 Question objects', () => {
       const doc = new Parser().parseDocument('a? b?')
 
@@ -222,7 +228,7 @@ describe('Document.getQuestions()', () => {
     })
   })
 
-  describe('TC120_Find_a_question_and_exclude_other_types_After (Indata: \'a? b. c!\')', () => {
+  describe('TC21_Find_a_question_and_exclude_other_types_After (Indata: \'a? b. c!\')', () => {
     it('Expected outcome: an array with a single Question object', () => {
       const doc = new Parser().parseDocument('a? b. c!')
 
@@ -233,7 +239,7 @@ describe('Document.getQuestions()', () => {
     })
   })
 
-  describe('TC21_Find_a_question_and_exclude_other_types_before (Indata: \'a. b! c?\')', () => {
+  describe('TC22_Find_a_question_and_exclude_other_types_before (Indata: \'a. b! c?\')', () => {
     it('Expected outcome: an array with a single Question object', () => {
       const doc = new Parser().parseDocument('a. b! c?')
 
@@ -244,7 +250,7 @@ describe('Document.getQuestions()', () => {
     })
   })
 
-  describe('TC22_Find_2_questions_and_exclude_other_types_inbetween (Indata: \'a? b. c! d?\')', () => {
+  describe('TC23_Find_2_questions_and_exclude_other_types_inbetween (Indata: \'a? b. c! d?\')', () => {
     it('Expected outcome: an array with 2 Question objects', () => {
       const doc = new Parser().parseDocument('a? b. c! d?')
 
@@ -257,7 +263,7 @@ describe('Document.getQuestions()', () => {
     })
   })
 
-  describe('TC23_Find_no_questions_and_exclude_other_types (Indata: \'a. b!\')', () => {
+  describe('TC24_Find_no_questions_and_exclude_other_types (Indata: \'a. b!\')', () => {
     it('Expected outcome: an empty array', () => {
       const doc = new Parser().parseDocument('a. b!')
 
@@ -269,7 +275,7 @@ describe('Document.getQuestions()', () => {
 })
 
 describe('Document.getExclamations()', () => {
-  describe('TC24_Find_an_exclamation_without_excluding_other_types (Indata: \'a!\')', () => {
+  describe('TC25_Find_an_exclamation_without_excluding_other_types (Indata: \'a!\')', () => {
     it('Expected outcome: an array with a single Exclamation object', () => {
       const doc = new Parser().parseDocument('a!')
 
@@ -280,7 +286,7 @@ describe('Document.getExclamations()', () => {
     })
   })
 
-  describe('TC25_Find_2_exclamations_without_excluding_other_types (Indata: \'a! b!\')', () => {
+  describe('TC26_Find_2_exclamations_without_excluding_other_types (Indata: \'a! b!\')', () => {
     it('Expected outcome: an array with 2 Exclamation objects', () => {
       const doc = new Parser().parseDocument('a! b!')
 
@@ -293,7 +299,7 @@ describe('Document.getExclamations()', () => {
     })
   })
 
-  describe('TC26_Find_an_exclamation_and_exclude_other_types_After (Indata: \'a! b. c?\')', () => {
+  describe('TC27_Find_an_exclamation_and_exclude_other_types_After (Indata: \'a! b. c?\')', () => {
     it('Expected outcome: an array with a single Exclamation object', () => {
       const doc = new Parser().parseDocument('a! b. c?')
 
@@ -304,7 +310,7 @@ describe('Document.getExclamations()', () => {
     })
   })
 
-  describe('TC27_Find_an_exclamation_and_exclude_other_types_before (Indata: \'a? b. c!\')', () => {
+  describe('TC28_Find_an_exclamation_and_exclude_other_types_before (Indata: \'a? b. c!\')', () => {
     it('Expected outcome: an array with a single Exclamation object', () => {
       const doc = new Parser().parseDocument('a. b? c!')
 
@@ -315,7 +321,7 @@ describe('Document.getExclamations()', () => {
     })
   })
 
-  describe('TC28_Find_2_exclamations_and_exclude_other_types_inbetween (Indata: \'a! b. c? d!\')', () => {
+  describe('TC29_Find_2_exclamations_and_exclude_other_types_inbetween (Indata: \'a! b. c? d!\')', () => {
     it('Expected outcome: an array with 2 Exclamation objects', () => {
       const doc = new Parser().parseDocument('a! b. c? d!')
 
@@ -328,7 +334,7 @@ describe('Document.getExclamations()', () => {
     })
   })
 
-  describe('TC29_Find_no_exclamations_and_exclude_other_types (Indata: \'a. b?\')', () => {
+  describe('TC30_Find_no_exclamations_and_exclude_other_types (Indata: \'a. b?\')', () => {
     it('Expected outcome: an empty array', () => {
       const doc = new Parser().parseDocument('a. b?')
 
