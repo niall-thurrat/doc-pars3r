@@ -87,7 +87,7 @@ List the individual test cases, or link to this.
 
 Screenshots from automatic testing.
 
-![alt text](https://github.com/[username]/[reponame]/blob/[branch]/image.jpg?raw=true)
+![Doc-parser test results, category 1: Document.getSentences()](https://gitlab.lnu.se/1dv610/student/nt222fc/l2/-/blob/master/Images/l2_cat1_test_results.png?raw=true)
 
 ## Chapter Reflections for Chapters 2-11
 Go through all code including code from laboratory 1 and update according to the book's clean code chapters 2-11 and what we discussed at lectures and workshops. Write a short (4-6 sentences) reflection for each chapter on how that particular chapter has affected or not affected your code. Use the book's terms. Give examples with readable screenshots from your code for each reflection.
