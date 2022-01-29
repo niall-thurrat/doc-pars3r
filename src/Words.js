@@ -16,10 +16,19 @@ export default class Words {
   }
 
   #setWords(tokenizer) {
-    while (tokenizer.getActiveToken().getType() === 'WORD') {
+    while (this.#getActiveTokenType(tokenizer) === 'WORD') {
       this.#add(this.#parseWord(tokenizer))
       tokenizer.setActiveTokenToNext()
     }
+  }
+
+  #getActiveTokenType(tokenizer) {
+    const activeToken = tokenizer.getActiveToken()
+    return this.#getTokenType(activeToken)
+  }
+
+  #getTokenType(token) {
+    return token.getType()
   }
 
   #parseWord(tokenizer) {

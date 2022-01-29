@@ -29,15 +29,26 @@ export default class Sentences {
   }
 
   #setSentences(tokenizer) {
-    while (tokenizer.getActiveToken().getType() !== 'END') {
+    while (this.#getActiveTokenType(tokenizer) !== 'END') {
       this.#addSentence(tokenizer)
       this.#setToFirstTokenAfterSentence(tokenizer)
     }
   }
 
+  #getActiveTokenType(tokenizer) {
+    const activeToken = tokenizer.getActiveToken()
+    return this.#getTokenType(activeToken)
+  }
+
+  #getTokenType(token) {
+    return token.getType()
+  }
+
   #addSentence(tokenizer) {
-    if (tokenizer.getActiveToken().getType() === 'WORD')
-      this.#add(this.#parseSentence(tokenizer))
+    if (this.#getActiveTokenType(tokenizer) === 'WORD') {
+      const parsedSentence = this.#parseSentence(tokenizer)
+      this.#add(parsedSentence)
+    }
     else
       this.#throwSyntacticErrorIfFirstTokenIsNotAWord()
   }
@@ -54,7 +65,7 @@ export default class Sentences {
   }
 
   #setToFirstTokenAfterSentence(tokenizer) {
-    while (tokenizer.getActiveToken().getType() === 'WORD') {
+    while (this.#getActiveTokenType(tokenizer) === 'WORD') {
       tokenizer.setActiveTokenToNext()
     }
     tokenizer.setActiveTokenToNext()

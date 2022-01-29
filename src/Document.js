@@ -31,7 +31,13 @@ export default class Document {
   }
 
   #throwTokenizerErrorIfNoEndToken(tokenizer) {
-    if (tokenizer.getActiveToken().getType() !== 'END')
+    const activeToken = tokenizer.getActiveToken()
+    
+    if (this.#getTokenType(activeToken) !== 'END')
       throw new TokenizerError('No END token after Sentences parsed')
+  }
+
+  #getTokenType(token) {
+    return token.getType()
   }
 }

@@ -27,8 +27,17 @@ export default class SentenceFactory {
 
   #setEndType(tokenizer) {
     this.#setToEndOfSentence(tokenizer)
-    this.#endType = tokenizer.getActiveToken().getType()
+    this.#endType = this.#getActiveTokenType(tokenizer)
     this.#setToStartOfSentence(tokenizer)
+  }
+
+  #getActiveTokenType(tokenizer) {
+    const activeToken = tokenizer.getActiveToken()
+    return this.#getTokenType(activeToken)
+  }
+
+  #getTokenType(token) {
+    return token.getType()
   }
 
   #setToEndOfSentence(tokenizer) {

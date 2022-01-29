@@ -10,8 +10,14 @@ export default class Word {
   }
 
   #setChars(tokenizer) {
-    const matchedChars = tokenizer.getActiveToken().getValue()
+    const activeToken = tokenizer.getActiveToken()
+    const matchedChars = this.#getTokenValue(activeToken)
+    
     this.#chars = matchedChars
+  }
+
+  #getTokenValue(token) {
+    return token.getValue()
   }
 }
   

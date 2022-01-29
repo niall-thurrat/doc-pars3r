@@ -1,12 +1,14 @@
 # Template for submission laboratory 2, 1dv610
 
 ## Checklist
+
   - [✅] I have written all the code and reflections myself. I have not used other people's code to solve the task.
   - [✅] My test results are written based on testing performed (and not theoretically, it should work :))
   - [✅] The only static methods or functions outside of classes that I have are to start my test application ex main (java).
   - [✅] The only libraries and ready-made classes used are those that must be used (or used to test the module).
 
 ## Self-assessment and goals
+
   - [ ] I'm not done because I know I'm missing something. Then do not submit!
   - [ ] I strive with this submission approved grade (E-D)
     - [✅] Most test cases work
@@ -59,6 +61,7 @@ The parser was developed next and imported the tokeniser module, thus creating t
 The pretty printer was developed last. Doc-pars3r is a dependency because it is used to break an input string into symmantic parts that can then be listed in an output.html file.  
   
 ## Description of my code
+
 **Describe your code at a high level of abstraction. A brief description of your most important classes and methods in your components. Feel free to create a class diagram as a picture. Describe the relationships between the classes between components.**
 
 Tokeniz3r is a stand-alone module that functions independently of any dependencies. It exposes a single class, the Tokenizer class, which has been built with simplicity in mind. It's public methods constitute the module's public interface: getActiveToken, setActiveTokenToNext and setActiveTokenToPrevious. When the class is instantiated it takes two arguments: an input string and a set of grammar rules bases on regex matching.
@@ -68,26 +71,44 @@ Doc-pars3r has been built with only one dependency. It imports the Tokeniz3r mod
 Pretty-print3r uses doc-pars3r as a dependency. In app.js it imports doc-pars3r and creates an instance of it's Parser class passing a string argument that it gets from the app start script. It then passes the returned parsed doc to it's HtmlListFormatter class which generates html that is then passed to the Printer class to be written to the output.html file.
 
 ## How I tested
+
 **Describe how you came to the conclusion that your code works. Describe the different parts and how they were tested. Screenshots from manual testing.**
 
 All 3 modules have a mocha test suite (using the chai expect assertion library) with only passing tests. Instructions for running the tests are found in each README.md. I believe the tests cover the functional requirements of each module including testing that exceptions are thrown as required and testing tries to include edge cases where appropriate.
 
-The Tokeniz3r tests are separated into 4 categories: the first 3 test 3 different grammar types and the last focuses on edge cases.
+The Tokeniz3r tests are separated into 4 categories: the first 3 categories test 3 different grammar types and the last focuses on edge cases.
 
 The Doc-pars3r tests are separated into 4 categories. Each tests the results returned from one of the four public methods of the Document class: getSentences, getRegularSentences, getQuestions and getExclamations.
 
-The Pretty-print3r mocha test suit has one category of tests for the HtmlListFormatter class. I have added a manual test case which checks that the Printer class functions as expected.
+The Pretty-print3r mocha test suit has one category of tests for the HtmlListFormatter class. I have added 2 manual test cases which check that the Printer class functions as expected.
 
-## Test case
+## Test cases
+
 List the individual test cases, or link to this.
 
-| Name | Indata | Expected Outcome | PASS / FAIL |
-| --------- | ------ | ---------------- | --------- |
-| | | | |
+**Tokeniz3r Automatic testing**
 
-Screenshots from automatic testing.
+![Tokeniz3r test results, category 1: WordAndDotGrammar](images/l1_cat1_test_results.png)
+![Tokeniz3r test results, category 2: ArithmeticGrammar](images/l1_cat2_test_results.png)
+![Tokeniz3r test results, category 3 + 4: MaximalMunchGrammar and endge cases](images/l1_cat3-4_test_results.png)
 
-![Doc-parser test results, category 1: Document.getSentences()](images/l2_cat1_test_results.png)
+**Doc-Pars3r Automatic testing**
+
+![Doc-pars3r test results, category 1: Document.getSentences()](images/l2_cat1_test_results.png)
+![Doc-pars3r test results, category 2: Document.getRegularSentences()](images/l2_cat2_test_results.png)
+![Doc-pars3r test results, category 3: Document.getQuestions()](images/l2_cat3_test_results.png)
+![Doc-pars3r test results, category 4: Document.getExclamations()](images/l2_cat4_test_results.png)
+
+**Pretty-Print3r Automatic testing**
+
+![Pretty-print3r test results, category 1: HtmlListFormatter](images/l2pp_cat1_test_results.png)
+
+**Pretty-Print3r Manual testing**
+
+| Name | Prerequisite | Indata | Expected Outcome | PASS / FAIL |
+| ---- | ------------ | ------ | ---------------- | ----------- |
+| TC7_Find_html_code_written_to_empty_IO/output.html | output.html file has no content | 'one. two? three!' | html formatted doc with list of 3 items| PASS |
+| TC8_Find_html_code_has_overwritten_IO/output.html | output.html file has content 'overwrite me!' | 'one. two? three!' | html formatted doc with list of 3 items| PASS |
 
 ## Chapter Reflections for Chapters 2-11
 Go through all code including code from laboratory 1 and update according to the book's clean code chapters 2-11 and what we discussed at lectures and workshops. Write a short (4-6 sentences) reflection for each chapter on how that particular chapter has affected or not affected your code. Use the book's terms. Give examples with readable screenshots from your code for each reflection.
@@ -104,41 +125,3 @@ NA
 ## Laboratory reflection
 Reflect on the task based on your development as a programmer.
 What have you learned and what do you look forward to learning?
-
-
-
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-
-## Components and reuse
- * Länka in URL om du använder olika repositorier för dina olika komponenter. 
- * Beskriv komponenterna och hur de skall användas.
- * Beskriv hur du anpassat din kod och instruktioner för att någon annan programmerare skall kunna använda dina komponenter. Om du skrivit instruktioner för din användare länka till dessa. Om inte beskriv här hur någon skall göra. 
- * Beskriv hur du säkerhetställt att beroendena mellan komponenterna är som beskrivs i laborationen. 
-
-## Beskrivning av min kod
-Beskriv din kod på en hög abstraktionsnivå. En kort beskrivning av dina viktigaste klasser och metoder i dina komponenter. Skapa gärna ett klassdiagram som bild. Beskriv relationerna mellan klasserna mellan komponenter.
-
-## Hur jag testat
-Beskriv hur du kommit fram till om din kod fungerar. Beskriv de olika delarna och hur de testats. Screenshots från manuell testning.
-
-### Testfall
-Lista de enskilda testfallen, eller länka in detta.
-
-| Namn      | Indata | Förväntat Utfall | PASS/FAIL |
-| --------- | ------ | ---------------- | --------- |
-|           |        |                  |           |
-
-Screenshots från automatisk testning.
-
-## Kapitelreflektioner för kapitel 2-11
-Gå igenom all kod inklusive kod från laboration 1 och uppdatera enligt bokens clean code kapitel 2-11 och det vi diskuterat på föreläsningar och workshops. Skriv en kort (4-6 meningar) reflektion för varje kapitel om hur just det kapitlet har påverkat eller inte påverkat din kod. Använd bokens termer. Ge exempel med läsbara screenshots från er kod till varje reflektion. 
-
-Fokusera på tydlighet, variation, ärlighet och vad som är intressant. Exempelvis om du har icke självklara överväganden med olika kvalitetsregler som står i konflikt med varandra så är dessa extra intressanta.
-
-### Kodkvalitetskrav för högre betyg
-Samma som för för lägre betyg men baka in de 10 reflektionerna från de olika kapitlen till en sammanhängande text som spänner över båda uppgifterna. Du har alltså en enda reflektion fast för både koden i uppgift 1 och uppgift 2. Ca två sidor max. Använd varierade uttryck från boken. 
-
-## Laborationsreflektion
-Reflektera över uppgiften utifrån din utveckling som programmerare. 
-Vad har du lärt dig och vad ser du fram emot att lära dig?
