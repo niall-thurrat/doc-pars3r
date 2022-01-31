@@ -176,5 +176,13 @@ N/A
 Reflect on the task based on your development as a programmer.
 What have you learned and what do you look forward to learning?
 
+I think I have learnt a lot about how code can be structured to be easier understood and added to by other developers. This in turn makes me confident that I’m producing is much better quality of code than I did before the course. I have learnt to place much more importance on understandability, at the expense of readability, and now consider a lot of code I have previously written as very dirty due to the sheer amount of need for mental mapping created in an effort to have less code. I am less afraid of larger names, wider lines, and accept that sometimes one needs to write more lines to have better code. Perhaps the biggest take away is the concept of using more fine-grained functions with good naming to create a narrative in my code which in turn removes the need to a large degree for comments. 
+
+Other concepts, such as writing higher abstract code first in classes and following the law of Demeter, still need worked with to sink further into my coding practice in future, and I look forward to trying to implement such concepts and learning more about them to continue to write better quality code.
+
+I have also really enjoyed developing with a test suite to check if I have broken anything as I change the code base. I want to learn more in future about mocking and how to implement this in test suites. TDD still feels like something I must get further practice with to see if it is something that I could incorporate into my coding routines.
+
+Given the very few hours that I have had to work on this project during very irregular study hours, I believe I have gained a heightened appreciation for working with cleaner code, as this has made it much easier for me to pick up where I left off after relatively long periods where I haven’t been able work with the code.
+
 ## Reference List
 [1] &emsp; R. C. Martin, Clean Code. Boston, MA: Pearson Education, Inc., 2009.
