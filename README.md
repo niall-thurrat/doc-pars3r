@@ -2,6 +2,17 @@
 
 A module that parses text documents!!!
 
+## a university project
+
+Assignment: [L2](https://github.com/niall-thurrat/tokeniz3r/wiki/L2)  
+Course: 1DV610 Software Quality, [Linnaeus University](https://lnu.se/en/)
+
+Doc-pars3r is one of a series of three modules created for the completion a software quality course. The three modules are:  
+
+- [Tokeniz3r](https://github.com/niall-thurrat/tokeniz3r) (fulfils assignment [L1](https://github.com/niall-thurrat/tokeniz3r/wiki/L1)): This module creates a set of tokens based on two parameters: an input string and a set of grammar rules.  The module is a published npm package.
+- Doc-pars3r (part of assignment [L2](https://github.com/niall-thurrat/tokeniz3r/wiki/L2)): This module creates a parsed document based on one parameter: an input string. It has a set of internal hard coded grammar rules and uses this with the input string to get tokens from the tokeniz3r module (it's only dependency). Doc-pars3r fulfils a basic function of parsing three sentence types: regular sentences, questions and exclamations. It is therefore only for use in a local dev environment.
+- [Pretty-print3r](https://github.com/niall-thurrat/pretty-print3r) (part of assignment [L2](https://github.com/niall-thurrat/tokeniz3r/wiki/L2)): This is a very basic module set up as a method to demo and test Doc-pars3r. It takes a string argument in the start script and updates an output.html file with a list of parsed sentences, formatted according to sentence type. The module is only for use in a local dev environment.
+
 ## What is a Document Parser?
 
 A parser is used to analyse the various parts of a language or data structure. Doc-pars3r uses Tokenis3r to break an input text into tokens (words and closing punctuations), then builds a document from these that consists of various sentence types.
